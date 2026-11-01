@@ -20,7 +20,7 @@ jobs:
           ndk-version: r23c
 
       - name: Build
-        run:
+        run: |
           NDK="${{ steps.setup-ndk.outputs.ndk-path }}"
           TOOLCHAIN="$NDK/toolchains/llvm/prebuilt/linux-x86_64"
           export CC="$TOOLCHAIN/bin/aarch64-linux-android23-clang"
