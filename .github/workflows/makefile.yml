@@ -33,7 +33,7 @@ jobs:
           export OBJCOPY="$TOOLCHAIN/bin/llvm-objcopy"
           export OBJDUMP="$TOOLCHAIN/bin/llvm-objdump"
           export READELF="$TOOLCHAIN/bin/llvm-readelf"
-          make -C src install
+          make -C src
 
       - name: Release
         uses: softprops/action-gh-release@v2
@@ -41,6 +41,6 @@ jobs:
           tag_name: ${{ inputs.tag }}
           fail_on_unmatched_files: true
           files: |
-            src/build/proot
+            src/proot
 
 
