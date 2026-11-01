@@ -1,0 +1,39 @@
+name: Makefile CI
+
+on:
+  workflow_dispatch: 
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup NDK r23c
+        uses: nttld/setup-ndk@v1
+        id: setup-ndk
+        with:
+          ndk-version: r23c
+
+      - name: Build
+        run:
+          NDK="${{ steps.setup-ndk.outputs.ndk-path }}"
+          TOOLCHAIN="$NDK/toolchains/llvm/prebuilt/linux-x86_64"
+          export CC="$TOOLCHAIN/bin/aarch64-linux-android23-clang"
+          export STRIP="$TOOLCHAIN/bin/llvm-strip"
+          export OBJCOPY="$TOOLCHAIN/bin/llvm-objcopy"
+          export OBJDUMP="$TOOLCHAIN/bin/llvm-objdump"
+          make -C src
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Release ${{ github.ref_name }}
+          files: |
+            src/build/proot
+
+
