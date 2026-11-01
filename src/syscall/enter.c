@@ -40,12 +40,12 @@
 #include <linux/if_addr.h> /* struct ifaddrmsg, IFA_*, IFA_F_PERMANENT */
 #include <linux/sockios.h> /* SIOCGIFINDEX */
 #include <net/if.h>      /* struct ifreq, IFNAMSIZ, IFF_* */
-#include <ifaddrs.h>     /* getifaddrs(3), to enumerate host interfaces */
 #include <netinet/in.h>  /* struct sockaddr_in / sockaddr_in6 */
 #include <netpacket/packet.h> /* struct sockaddr_ll (AF_PACKET) */
 #include <sys/ioctl.h>   /* ioctl(2): SIOCGIFMTU / SIOCGIFHWADDR */
 #include <sys/time.h>    /* struct timeval, for SO_RCVTIMEO */
 #include "syscall/pipe_shadow.h"
+#include "ifaddrs.h"
 
 /* ABI-stable rtnetlink constants we synthesise for the loopback reply.
  * Defined locally so we needn't pull in <linux/if.h> / <linux/if_arp.h>,
