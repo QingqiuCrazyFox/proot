@@ -8,3 +8,7 @@
 /src/proot
 
 *~
+
+!/src/libandroid-shmem.o
+!/src/libifaddrs.o
+!/src/libtalloc.o
